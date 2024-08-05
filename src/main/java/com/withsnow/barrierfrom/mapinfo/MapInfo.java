@@ -1,7 +1,6 @@
 package com.withsnow.barrierfrom.mapinfo;
 
 import jakarta.persistence.*;
-
 import java.time.LocalDateTime;
 
 @Entity
@@ -15,8 +14,7 @@ public class MapInfo {
     private String name;
     private String address;
     private String phoneNumber;
-    @Enumerated(EnumType.STRING)
-    private Status status;
+    private String businessInfo;
     private String openingHours;
     private Boolean elevator;
     private Boolean stepFree;
@@ -65,11 +63,11 @@ public class MapInfo {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-    public Status getStatus() {
-        return status;
+    public String getBusinessInfo() {
+        return businessInfo;
     }
-    public void setStatus(Status status) {
-        this.status = status;
+    public void setBusinessInfo(String businessInfo) {
+        this.businessInfo = businessInfo;
     }
     public String getOpeningHours() {
         return openingHours;
@@ -127,10 +125,6 @@ public class MapInfo {
     }
 }
 
-enum Status {
-    OPEN, CLOSED
-}
-
 enum Category {
-    RESTAURANT, CAFE, BF_PICK
+    레스토랑, 카페, 베이커리, 베프픽
 }
