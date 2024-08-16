@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "users")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
@@ -28,6 +29,16 @@ public class User {
     @Column(nullable = false)
     private LocalDateTime updatedAt;
 
+    // Default constructor required by JPA
+    public User() {
+    }
+
+    // Constructor with userId (optional)
+    public User(Long userId) {
+        this.userId = userId;
+    }
+
+    // Getters and setters
     public Long getUserId() {
         return userId;
     }
