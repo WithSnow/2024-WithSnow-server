@@ -46,4 +46,27 @@ public class MapInfoController {
     public void deleteLocation(@PathVariable Long id) {
         service.deleteLocation(id);
     }
+
+    @GetMapping("/category/{category}")
+    public List<MapInfo> getByCategory(@PathVariable Category category) {
+        return service.findByCategory(category);
+    }
+
+    @GetMapping("/search/name")
+    public List<MapInfo> getByName(@RequestParam String name) {
+        return service.findByName(name);
+    }
+
+    @GetMapping("/search/address")
+    public List<MapInfo> getByAddress(@RequestParam String address) {
+        return service.findByAddress(address);
+    }
+
+    @GetMapping("/search/coordinates")
+    public List<MapInfo> getByCoordinates(@RequestParam double minLat,
+                                          @RequestParam double maxLat,
+                                          @RequestParam double minLon,
+                                          @RequestParam double maxLon) {
+        return service.findWithinCoordinates(minLat, maxLat, minLon, maxLon);
+    }
 }

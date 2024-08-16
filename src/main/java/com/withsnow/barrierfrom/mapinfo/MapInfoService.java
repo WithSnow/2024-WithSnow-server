@@ -24,4 +24,24 @@ public class MapInfoService {
     public void deleteLocation(Long id) {
         repository.deleteById(id);
     }
+
+    // 카테고리로 검색
+    public List<MapInfo> findByCategory(Category category) {
+        return repository.findByCategory(category);
+    }
+
+    // 이름으로 검색
+    public List<MapInfo> findByName(String name) {
+        return repository.findByNameContaining(name);
+    }
+
+    // 주소로 검색
+    public List<MapInfo> findByAddress(String address) {
+        return repository.findByAddressContaining(address);
+    }
+
+    // 특정 범위 내의 좌표로 검색
+    public List<MapInfo> findWithinCoordinates(double minLat, double maxLat, double minLon, double maxLon) {
+        return repository.findWithinCoordinates(minLat, maxLat, minLon, maxLon);
+    }
 }
