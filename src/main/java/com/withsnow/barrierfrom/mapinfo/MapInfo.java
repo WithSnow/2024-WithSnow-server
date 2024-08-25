@@ -42,8 +42,9 @@ public class MapInfo {
 
     private Float rating;
 
-    @Enumerated(EnumType.STRING)
-    private Category category;
+    @Column(name = "category")
+    @JsonProperty("category")
+    private String category;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
@@ -148,11 +149,11 @@ public class MapInfo {
         this.rating = rating;
     }
 
-    public Category getCategory() {
+    public String getCategory() {
         return category;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(String category) {
         this.category = category;
     }
 
@@ -182,8 +183,4 @@ public class MapInfo {
     protected void onUpdate() {
         updatedAt = LocalDateTime.now();
     }
-}
-
-enum Category {
-    레스토랑, 카페, 베이커리, 베프픽
 }

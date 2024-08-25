@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface MapInfoRepository extends JpaRepository<MapInfo, Long> {
     // 카테고리로 검색
-    List<MapInfo> findByCategory(Category category);
+    List<MapInfo> findByCategory(String category);
 
     // 이름으로 검색
     List<MapInfo> findByNameContaining(String name);

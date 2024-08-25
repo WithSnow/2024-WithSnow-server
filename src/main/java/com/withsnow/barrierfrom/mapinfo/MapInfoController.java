@@ -52,9 +52,9 @@ public class MapInfoController {
     private SearchHistoryService searchHistoryService;
 
     @GetMapping("/category/{category}")
-    public List<MapInfo> getByCategory(@PathVariable Category category) {
+    public List<MapInfo> getByCategory(@PathVariable String category) {
         List<MapInfo> results = service.findByCategory(category);
-        searchHistoryService.saveSearchHistory(category.name(), "CATEGORY", null, null, null, results.size());
+        searchHistoryService.saveSearchHistory(category, "CATEGORY", null, null, null, results.size());
         return results;
     }
 
