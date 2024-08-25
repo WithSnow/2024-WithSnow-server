@@ -26,7 +26,7 @@ public class MapInfoService {
     }
 
     // 카테고리로 검색
-    public List<MapInfo> findByCategory(Category category) {
+    public List<MapInfo> findByCategory(String category) {
         return repository.findByCategory(category);
     }
 
