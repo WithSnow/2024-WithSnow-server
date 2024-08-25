@@ -1,6 +1,5 @@
 package com.withsnow.barrierfrom.search;
 
-import com.withsnow.barrierfrom.user.User;
 import jakarta.persistence.*;
         import java.time.LocalDateTime;
 
@@ -10,10 +9,6 @@ public class SearchHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long searchId;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
 
     private String searchTerm;
     private String searchType;
@@ -31,14 +26,6 @@ public class SearchHistory {
 
     public void setSearchId(Long searchId) {
         this.searchId = searchId;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public String getSearchTerm() {
