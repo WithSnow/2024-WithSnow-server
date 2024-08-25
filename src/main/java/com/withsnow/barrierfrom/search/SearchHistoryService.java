@@ -1,6 +1,5 @@
 package com.withsnow.barrierfrom.search;
 
-import com.withsnow.barrierfrom.user.User;
 import com.withsnow.barrierfrom.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,11 +15,8 @@ public class SearchHistoryService {
     @Autowired
     private UserRepository userRepository;
 
-    public void saveSearchHistory(User user, String searchTerm, String searchType, Double latitude, Double longitude, Double searchRadius, Integer resultCount) {
-        user = userRepository.findById(user.getUserId()).orElse(null);
-        
+    public void saveSearchHistory(String searchTerm, String searchType, Double latitude, Double longitude, Double searchRadius, Integer resultCount) {
         SearchHistory searchHistory = new SearchHistory();
-        searchHistory.setUser(user);  // User 객체 설정
         searchHistory.setSearchTerm(searchTerm);
         searchHistory.setSearchType(searchType);
         searchHistory.setLatitude(latitude);

@@ -1,7 +1,6 @@
 package com.withsnow.barrierfrom.mapinfo;
 
 import com.withsnow.barrierfrom.search.SearchHistoryService;
-import com.withsnow.barrierfrom.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,9 +22,9 @@ public class MapInfoController {
         return service.getAllLocations();
     }
 
-    @GetMapping("/{id}")
-    public MapInfo getLocationById(@PathVariable Long id) {
-        return service.getLocationById(id);
+    @GetMapping("/name")
+    public List<MapInfo> getLocationsByName(@RequestParam String name) {
+        return service.findByName(name);
     }
 
     @PostMapping
@@ -53,26 +52,23 @@ public class MapInfoController {
     private SearchHistoryService searchHistoryService;
 
     @GetMapping("/category/{category}")
-    public List<MapInfo> getByCategory(@PathVariable Category category, @RequestParam Long userId) {
-        User user = new User(userId); // User 객체 생성
+    public List<MapInfo> getByCategory(@PathVariable Category category) {
         List<MapInfo> results = service.findByCategory(category);
-        searchHistoryService.saveSearchHistory(user, category.name(), "CATEGORY", null, null, null, results.size());
+        searchHistoryService.saveSearchHistory(category.name(), "CATEGORY", null, null, null, results.size());
         return results;
     }
 
     @GetMapping("/search/name")
-    public List<MapInfo> getByName(@RequestParam String name, @RequestParam Long userId) {
-        User user = new User(userId); // User 객체 생성
+    public List<MapInfo> getByName(@RequestParam String name) {
         List<MapInfo> results = service.findByName(name);
-        searchHistoryService.saveSearchHistory(user, name, "NAME", null, null, null, results.size());
+        searchHistoryService.saveSearchHistory(name, "NAME", null, null, null, results.size());
         return results;
     }
 
     @GetMapping("/search/address")
-    public List<MapInfo> getByAddress(@RequestParam String address, @RequestParam Long userId) {
-        User user = new User(userId); // User 객체 생성
+    public List<MapInfo> getByAddress(@RequestParam String address) {
         List<MapInfo> results = service.findByAddress(address);
-        searchHistoryService.saveSearchHistory(user, address, "ADDRESS", null, null, null, results.size());
+        searchHistoryService.saveSearchHistory(address, "ADDRESS", null, null, null, results.size());
         return results;
     }
 
@@ -80,11 +76,9 @@ public class MapInfoController {
     public List<MapInfo> getByCoordinates(@RequestParam double minLat,
                                           @RequestParam double maxLat,
                                           @RequestParam double minLon,
-                                          @RequestParam double maxLon,
-                                          @RequestParam Long userId) {
-        User user = new User(userId); // User 객체 생성
+                                          @RequestParam double maxLon) {
         List<MapInfo> results = service.findWithinCoordinates(minLat, maxLat, minLon, maxLon);
-        searchHistoryService.saveSearchHistory(user, "Coordinates Search", "COORDINATES", (minLat + maxLat) / 2, (minLon + maxLon) / 2, null, results.size());
+        searchHistoryService.saveSearchHistory("Coordinates Search", "COORDINATES", (minLat + maxLat) / 2, (minLon + maxLon) / 2, null, results.size());
         return results;
     }
 

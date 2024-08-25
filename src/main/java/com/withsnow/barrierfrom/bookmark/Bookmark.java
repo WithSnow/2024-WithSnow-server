@@ -1,7 +1,6 @@
 package com.withsnow.barrierfrom.bookmark;
 
 import jakarta.persistence.*;
-import com.withsnow.barrierfrom.user.User;
 import com.withsnow.barrierfrom.mapinfo.MapInfo;
 
 import java.time.LocalDateTime;
@@ -12,10 +11,6 @@ public class Bookmark {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long bookmarkId;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
 
     @ManyToOne
     @JoinColumn(name = "map_id", nullable = false)
@@ -31,14 +26,6 @@ public class Bookmark {
 
     public void setBookmarkId(Long bookmarkId) {
         this.bookmarkId = bookmarkId;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public MapInfo getMapInfo() {
