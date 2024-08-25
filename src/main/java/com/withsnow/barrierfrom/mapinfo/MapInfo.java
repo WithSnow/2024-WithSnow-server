@@ -20,10 +20,6 @@ public class MapInfo {
     @JsonProperty("phone_number")
     private String phoneNumber;
 
-    @Column(name = "business_info")
-    @JsonProperty("business_info")
-    private String businessInfo;
-
     @Column(name = "opening_hours")
     @JsonProperty("opening_hours")
     private String openingHours;
@@ -102,14 +98,6 @@ public class MapInfo {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    public String getBusinessInfo() {
-        return businessInfo;
-    }
-
-    public void setBusinessInfo(String businessInfo) {
-        this.businessInfo = businessInfo;
     }
 
     public String getOpeningHours() {
