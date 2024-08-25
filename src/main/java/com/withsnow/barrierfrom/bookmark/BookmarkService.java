@@ -11,10 +11,9 @@ public class BookmarkService {
     @Autowired
     private BookmarkRepository bookmarkRepository;
 
-    public List<Bookmark> getBookmarksByUserId(Long userId) {
-        return bookmarkRepository.findByUser_UserId(userId);
+    public List<Bookmark> getAllBookmarks() {
+        return bookmarkRepository.findAll();
     }
-
     public Bookmark saveBookmark(Bookmark bookmark) {
         return bookmarkRepository.save(bookmark);
     }

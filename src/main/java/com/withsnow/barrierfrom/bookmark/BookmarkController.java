@@ -6,15 +6,15 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/bookmarks/{userId}")
+@RequestMapping("/bookmarks")
 public class BookmarkController {
 
     @Autowired
     private BookmarkService bookmarkService;
 
     @GetMapping
-    public List<Bookmark> getBookmarksByUserId(@PathVariable Long userId) {
-        return bookmarkService.getBookmarksByUserId(userId);
+    public List<Bookmark> getAllBookmarks() {
+        return bookmarkService.getAllBookmarks();
     }
 
     @PostMapping
