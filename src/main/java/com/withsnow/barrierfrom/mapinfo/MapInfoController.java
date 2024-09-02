@@ -4,7 +4,9 @@ import com.withsnow.barrierfrom.search.SearchHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/maps")
@@ -80,6 +82,30 @@ public class MapInfoController {
         List<MapInfo> results = service.findWithinCoordinates(minLat, maxLat, minLon, maxLon);
         searchHistoryService.saveSearchHistory("Coordinates Search", "COORDINATES", (minLat + maxLat) / 2, (minLon + maxLon) / 2, null, results.size());
         return results;
+    }
+
+    @GetMapping("/route")
+    public Map<String, Map<String, Double>> getRouteCoordinates(@RequestParam String origin, @RequestParam String destination) {
+        Map<String, Map<String, Double>> coordinates = new HashMap<>();
+
+        MapInfo originLocation = service.findByName(origin).stream().findFirst().orElse(null);
+        MapInfo destinationLocation = service.findByName(destination).stream().findFirst().orElse(null);
+
+        if (originLocation != null) {
+            Map<String, Double> originCoordinates = new HashMap<>();
+            originCoordinates.put("latitude", originLocation.getLatitude());
+            originCoordinates.put("longitude", originLocation.getLongitude());
+            coordinates.put("origin", originCoordinates);
+        }
+
+        if (destinationLocation != null) {
+            Map<String, Double> destinationCoordinates = new HashMap<>();
+            destinationCoordinates.put("latitude", destinationLocation.getLatitude());
+            destinationCoordinates.put("longitude", destinationLocation.getLongitude());
+            coordinates.put("destination", destinationCoordinates);
+        }
+
+        return coordinates;
     }
 
 }
