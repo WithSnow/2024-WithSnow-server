@@ -85,24 +85,16 @@ public class MapInfoController {
     }
 
     @GetMapping("/route")
-    public Map<String, Map<String, Double>> getRouteCoordinates(@RequestParam String origin, @RequestParam String destination) {
+    public Map<String, Map<String, Double>> getRouteCoordinates(@RequestParam String origin) {
         Map<String, Map<String, Double>> coordinates = new HashMap<>();
 
         MapInfo originLocation = service.findByName(origin).stream().findFirst().orElse(null);
-        MapInfo destinationLocation = service.findByName(destination).stream().findFirst().orElse(null);
 
         if (originLocation != null) {
             Map<String, Double> originCoordinates = new HashMap<>();
             originCoordinates.put("latitude", originLocation.getLatitude());
             originCoordinates.put("longitude", originLocation.getLongitude());
             coordinates.put("origin", originCoordinates);
-        }
-
-        if (destinationLocation != null) {
-            Map<String, Double> destinationCoordinates = new HashMap<>();
-            destinationCoordinates.put("latitude", destinationLocation.getLatitude());
-            destinationCoordinates.put("longitude", destinationLocation.getLongitude());
-            coordinates.put("destination", destinationCoordinates);
         }
 
         return coordinates;
